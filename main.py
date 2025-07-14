@@ -37,7 +37,7 @@ async def ai_game_loop():
             logger.info(f"Game over! Winner: Player {1 - game.winner}")
             break
 
-        await asyncio.sleep(0)
+        await asyncio.sleep(1)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
