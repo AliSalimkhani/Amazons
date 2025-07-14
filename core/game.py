@@ -10,6 +10,16 @@ class Game:
         self.players = [player0, player1]
         self.game_over = False
         self.winner = None
+        self.player0_name = player0.player_name
+        self.player1_name = player1.player_name
+
+    def current_player_name(self):
+        return self.players[self.current_turn].player_name
+
+    def winner_name(self):
+        if self.winner is None:
+            return None
+        return self.players[self.winner].player_name
 
     @property
     def current_turn(self):
@@ -58,6 +68,5 @@ class Game:
             # For now, just pick the first valid move
             move = valid_moves[0]
             self.board.apply_move(move)
-            # تغییر نوبت باید در board انجام شود
             self.board.current_turn = 1 - self.board.current_turn
 

@@ -17,8 +17,8 @@ logger = logging.getLogger(__name__)
 
 # ==== Initial Game Setup ====
 board = Board()
-player0 = RandomAgent(0)
-player1 = RandomAgent(1)
+player0 = RandomAgent(0,"Ali")
+player1 = RandomAgent(1,"Mobin")
 game = Game(board, player0, player1)
 
 async def ai_game_loop():
@@ -26,13 +26,13 @@ async def ai_game_loop():
         agent = game.players[board.current_turn]
         move = agent.get_move(board)
         board.apply_move(move)
-        logger.info(f"AI Player {board.current_turn} moved: {move}")
+        logger.info(f"AI Player {1-board.current_turn} moved: {move}")
 
         valid_moves = game.generate_valid_moves()
         if not valid_moves:
             game.game_over = True
             game.winner = 1 - board.current_turn
-            logger.info(f"Game over! Winner: Player {game.winner}")
+            logger.info(f"Game over! Winner: Player {game.winner} , {game.winner_name()}")
             break
 
         await asyncio.sleep(1)  # 1 second delay between moves
