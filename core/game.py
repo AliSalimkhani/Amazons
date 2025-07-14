@@ -65,7 +65,6 @@ class Game:
                 self.winner = 1 - self.current_turn
                 print(f"Player {self.winner} wins!")
                 return
-            # For now, just pick the first valid move
             move = valid_moves[0]
             self.board.apply_move(move)
             self.board.current_turn = 1 - self.board.current_turn

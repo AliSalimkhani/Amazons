@@ -23,13 +23,11 @@ class Board:
             ],
         }
 
-        # Place queens on the board
         for player_id, queens in self.player_queens.items():
             for queen in queens:
                 pos = queen.position
                 self.board_grid[pos.x][pos.y] = f"Q{queen.player_id}-{queen.queen_id}"
 
-        # Track whose turn it is: 0 or 1
         self.current_turn = 0
 
     def in_bounds(self, x, y):
@@ -52,7 +50,14 @@ class Board:
             x += step_x
             y += step_y
 
-        # Final cell must also be empty
+        def current_player_name(self):
+            return self.players[self.current_turn].player_name
+
+        def winner_name(self):
+            if self.winner is None:
+                return None
+            return self.players[self.winner].player_name
+
         return self.in_bounds(end.x, end.y) and self.board_grid[end.x][end.y] is None
 
     def is_valid_arrow(self, start: Position, arrow: Position) -> bool:

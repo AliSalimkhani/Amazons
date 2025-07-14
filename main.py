@@ -17,8 +17,10 @@ logger = logging.getLogger(__name__)
 
 # ==== Initial Game Setup ====
 board = Board()
-player0 = RandomAgent(0,"Ali")
-player1 = RandomAgent(1,"Mobin")
+player1_name = ""
+plater2_name = ""
+player0 = RandomAgent(0,player1_name)
+player1 = RandomAgent(1,plater2_name)
 game = Game(board, player0, player1)
 
 async def ai_game_loop():
@@ -35,7 +37,7 @@ async def ai_game_loop():
             logger.info(f"Game over! Winner: Player {game.winner} , {game.winner_name()}")
             break
 
-        await asyncio.sleep(1)  # 1 second delay between moves
+        await asyncio.sleep(1)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
