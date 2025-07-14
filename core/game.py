@@ -10,16 +10,6 @@ class Game:
         self.players = [player0, player1]
         self.game_over = False
         self.winner = None
-        self.player0_name = player0.player_name
-        self.player1_name = player1.player_name
-
-    def current_player_name(self):
-        return self.players[self.current_turn].player_name
-
-    def winner_name(self):
-        if self.winner is None:
-            return None
-        return self.players[self.winner].player_name
 
     @property
     def current_turn(self):
