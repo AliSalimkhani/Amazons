@@ -18,23 +18,25 @@ logger = logging.getLogger(__name__)
 # ==== Initial Game Setup ====
 board = Board()
 player1_name = ""
-plater2_name = ""
+player2_name = ""
 player0 = RandomAgent(0,player1_name)
-player1 = RandomAgent(1,plater2_name)
+player1 = RandomAgent(1,player2_name)
 game = Game(board, player0, player1)
+
+# whenever you wanted to see the count of valid moves just type len(game.generate_valid_moves())
 
 async def ai_game_loop():
     while not game.game_over:
         agent = game.players[board.current_turn]
         move = agent.get_move(board)
         board.apply_move(move)
-        logger.info(f"AI Player {1-board.current_turn} moved: {move}")
+        logger.info(f"AI Player {1-board.current_turn} moved: {move} , valid moves:{len(game.generate_valid_moves())}")
 
         valid_moves = game.generate_valid_moves()
         if not valid_moves:
             game.game_over = True
             game.winner = 1 - board.current_turn
-            logger.info(f"Game over! Winner: Player {game.winner} , {game.winner_name()}")
+            logger.info(f"Game over! Winner: Player {1 - game.winner} , {game.winner_name()}")
             break
 
         await asyncio.sleep(1)
